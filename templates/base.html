@@ -20,7 +20,7 @@
                 <img src="{{pet.photo_url}}" alt="{{pet.name}}" class='img-thumbnail'>
                 {% endif %}
                 <p>
-                    <a href="" class='text-info'>{{pet.name}}</a> {% if pet.available %} <span><b>is available!</b></span> {% endif %}
+                    <a href="/{{pet.id}}" class='text-info'>{{pet.name}}</a> {% if pet.available %} <span><b>is available!</b></span> {% endif %}
                 </p>
             </div>
             {% endfor %}

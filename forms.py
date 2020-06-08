@@ -5,6 +5,7 @@ from wtforms.validators import InputRequired, Optional, AnyOf, NumberRange
 
 
 class PetForm(FlaskForm):
+    """ Form for Pet data """
     name = StringField("Pet Name", validators=[
                        InputRequired(message="Enter a name for your pet")])
     species = StringField("Species", validators=[
@@ -14,3 +15,5 @@ class PetForm(FlaskForm):
         min=0, max=30, message="Age must be between 0 and 30")])
     notes = StringField("Anything else we should know?",
                         validators=[Optional()])
+    available = BooleanField(
+        "Is this pet available for adoption?", default='checked')

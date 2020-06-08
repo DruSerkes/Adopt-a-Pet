@@ -10,7 +10,7 @@
             <form method="POST">
                 {{ form.hidden_tag() }} 
                     {% for field in form 
-                        if field.widget.input_type != 'hidden' %}
+                        if field.widget.input_type != 'hidden' and field.widget.input_type != 'checkbox'%}
                         <div class='form-group'>
                             {{field.label}}
                             {{field(class_='form-control')}}

@@ -43,3 +43,31 @@ def add_pet():
         return redirect('/')
     else:
         return render_template('add_pet.html', form=form)
+
+
+# Step 7: Handle Edit Form
+# This should validate the form:
+
+# if it doesn’t validate, it should re-render the form
+# if it does validate, it should edit the pet
+# This should be a POST request to the URL path /[pet-id-number].
+
+
+@app.route('/<int:id>', methods=['GET', 'POST'])
+def pet(id):
+    """ Show/Edit details about a pet """
+    pet = Pet.query.get(id)
+    form = PetForm(obj=pet)
+
+    if form.validate_on_submit():
+        photo_url = form.photo.data
+        notes = form.notes.data
+        available = form.available.data
+
+        pet.photo_url = photo_url
+        pet.notes = notes
+        pet.available = available
+        db.session.commit()
+        return redirect(f'/{id}')
+    else:
+        return render_template('edit_pet.html', form=form, pet=pet)
