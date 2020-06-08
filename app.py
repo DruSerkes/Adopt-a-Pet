@@ -48,17 +48,13 @@ def add_pet():
 @app.route('/<int:id>', methods=['GET', 'POST'])
 def view_edit_pet(id):
     """ Show/Edit details about a pet """
-    pet = Pet.query.get(id)
+    pet = Pet.query.get_or_404(id)
     form = PetForm(obj=pet)
 
     if form.validate_on_submit():
-        photo_url = form.photo.data
-        notes = form.notes.data
-        available = form.available.data
-
-        pet.photo_url = photo_url
-        pet.notes = notes
-        pet.available = available
+        pet.photo_url = form.photo_url.data
+        pet.notes = form.notes.data
+        pet.available = form.available.data
         db.session.commit()
         return redirect(f'/{id}')
     else:
