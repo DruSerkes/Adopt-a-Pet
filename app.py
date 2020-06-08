@@ -19,7 +19,7 @@ connect_db(app)
 # This should be at the URL path /add. Add a link to this from the homepage.
 
 @app.route('/')
-def home_page():
+def show_home_page():
     """ Home page - displays all pets """
     pets = Pet.query.all()
     return render_template('base.html', pets=pets)
@@ -45,16 +45,8 @@ def add_pet():
         return render_template('add_pet.html', form=form)
 
 
-# Step 7: Handle Edit Form
-# This should validate the form:
-
-# if it doesn’t validate, it should re-render the form
-# if it does validate, it should edit the pet
-# This should be a POST request to the URL path /[pet-id-number].
-
-
 @app.route('/<int:id>', methods=['GET', 'POST'])
-def pet(id):
+def view_edit_pet(id):
     """ Show/Edit details about a pet """
     pet = Pet.query.get(id)
     form = PetForm(obj=pet)
