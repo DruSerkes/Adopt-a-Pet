@@ -25,40 +25,40 @@
     <div class="row justify-content-center">
         <div class="col-md-6 my-3">
             <form method="POST">
-                {{ form.hidden_tag() }}
-                        <div class='form-group'>
-                            {{form.photo_url.label}}
-                            {{form.photo_url(class_='form-control')}}
-            
-                            {%for error in form.photo_url.errors%}
-                            <small class='form-text text-danger'>
-                                {{error}}
-                            </small>
-                            {% endfor %}
-                        </div>
-                        <div class="form-group">
-                            {{form.notes.label}}
-                            {{form.notes(class_='form-control')}}
+            {{ form.hidden_tag() }}
+                <div class='form-group'>
+                    {{form.photo_url.label}}
+                    {{form.photo_url(class_='form-control')}}
+    
+                    {%for error in form.photo_url.errors%}
+                    <small class='form-text text-danger'>
+                        {{error}}
+                    </small>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    {{form.notes.label}}
+                    {{form.notes(class_='form-control')}}
 
-                            {%for error in form.notes.errors%}
-                            <small class='form-text text-danger'>
-                                {{error}}
-                            </small>
-                            {% endfor %}
-                        </div>
-                        <div class="">
-                            {{form.available.label(class_='')}}
-                            {{form.available(class_='m-1')}}
-                            
-                            {%for error in form.available.errors%}
-                            <small class='form-text text-danger'>
-                                {{error}}
-                            </small>
-                            {% endfor %}
-                        </div>
-                        <button class='btn btn-success btn-lg'>Save</button>
-                        <a href='/' class='btn btn-danger btn-lg'>Go Back</a>
-                </form>
+                    {%for error in form.notes.errors%}
+                    <small class='form-text text-danger'>
+                        {{error}}
+                    </small>
+                    {% endfor %}
+                </div>
+                <div class="">
+                    {{form.available.label(class_='')}}
+                    {{form.available(class_='m-1')}}
+                    
+                    {%for error in form.available.errors%}
+                    <small class='form-text text-danger'>
+                        {{error}}
+                    </small>
+                    {% endfor %}
+                </div>
+                <button class='btn btn-success btn-lg'>Save</button>
+                <a href='/' class='btn btn-danger btn-lg'>Go Back</a>
+            </form>
         </div>
     </div>
     

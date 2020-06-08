@@ -55,6 +55,7 @@ def view_edit_pet(id):
         pet.photo_url = form.photo_url.data
         pet.notes = form.notes.data
         pet.available = form.available.data
+        db.session.add(pet)
         db.session.commit()
         return redirect(f'/{id}')
     else:
