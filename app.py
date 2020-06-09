@@ -5,18 +5,15 @@ from forms import PetForm
 
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = "secretkey1239123"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///pets'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = "secretkey1239123"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)
 
 connect_db(app)
 
-
-# This should be at the URL path /add. Add a link to this from the homepage.
 
 @app.route('/')
 def show_home_page():
@@ -45,17 +42,21 @@ def add_pet():
         return render_template('add_pet.html', form=form)
 
 
-@app.route('/<int:id>', methods=['GET', 'POST'])
-def view_edit_pet(id):
-    """ Show/Edit details about a pet """
-    pet = Pet.query.get_or_404(id)
+@app.route('/<int:pet_id>', methods=['GET', 'POST'])
+def edit_pet(pet_id):
+    """ View / Edit details for pet """
+    pet = Pet.query.get_or_404(pet_id)
     form = PetForm(obj=pet)
-
     if form.validate_on_submit():
+        pet.name = pet.name
+        pet.species = pet.species
         pet.photo_url = form.photo_url.data
         pet.notes = form.notes.data
-        pet.available = form.available.data
+        # pet.available = form.available.data
         db.session.commit()
+
         return redirect('/')
     else:
+        print(form.validate_on_submit())
+        print(form.errors)
         return render_template('edit_pet.html', form=form, pet=pet)
