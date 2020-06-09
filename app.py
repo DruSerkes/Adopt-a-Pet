@@ -29,9 +29,9 @@ def add_pet():
     if form.validate_on_submit():
         name = form.name.data
         species = form.species.data
-        photo_url = form.photo_url.data if form.photo_url.data else ""
-        age = form.age.data if form.age.data else ""
-        notes = form.notes.data if form.notes.data else ""
+        photo_url = form.photo_url.data
+        age = form.age.data
+        notes = form.notes.data
 
         pet = Pet(name=name, species=species,
                   photo_url=photo_url, age=age, notes=notes)
@@ -52,7 +52,7 @@ def edit_pet(pet_id):
         pet.species = pet.species
         pet.photo_url = form.photo_url.data
         pet.notes = form.notes.data
-        # pet.available = form.available.data
+        pet.available = form.available.data
         db.session.commit()
 
         return redirect('/')
